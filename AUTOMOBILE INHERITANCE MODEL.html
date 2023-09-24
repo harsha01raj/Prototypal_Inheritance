@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AUTOMOBILE INHERITANCE MODEL</title>
+  </head>
+  <body>
+    <h1 align="center">AUTOMOBILE INHERITANCE MODEL</h1>
+  </body>
+  <script>
+    function wheelerAutomobile(name, model, color, numberOfWheels) {
+      let obj = {};
+      Object.setPrototypeOf(obj, wheelerAutomobile.prototype);
+      obj.name = name;
+      obj.model = model;
+      obj.color = color;
+      obj.numberOfWheels = numberOfWheels;
+      return obj;
+    }
+    wheelerAutomobile.prototype.accelerate = function () {
+      console.log("The car will accelerate");
+    };
+    wheelerAutomobile.prototype.brake = function () {
+      console.log("Apply brake");
+    };
+
+    function car(name, model, color, numberOfWheels, price) {
+      let obj = wheelerAutomobile(name, model, color, numberOfWheels);
+      Object.setPrototypeOf(obj, car.prototype);
+      obj.price = price;
+      return obj;
+    }
+
+    Object.setPrototypeOf(car.prototype, wheelerAutomobile.prototype);
+
+    car.prototype.Autolock = function () {
+      console.log("The car has autolock system");
+    };
+    car.prototype.comfort = function () {
+      console.log("Too comfortable");
+    };
+    let car1 = car("mercedies", 46467, "red", 5, 100000000);
+    console.log(car1);
+
+    function autoMobiles(name, model, color, numberOfWheels) {
+      this.name = name;
+      this.model = model;
+      this.color = color;
+      this.numberOfWheels = numberOfWheels;
+    }
+
+    autoMobiles.prototype.accelerate1 = function () {
+      console.log("The car will start to accelerate");
+    };
+
+    autoMobiles.prototype.brake = function () {
+      console.log("Apply brake");
+    };
+
+    function superCar(name, model, color, numberOfWheels, price) {
+      autoMobiles.call(this, name, model, color, numberOfWheels);
+      this.price = price;
+    }
+
+    superCar.prototype.autostart = function () {
+      console.log("The car has autostart system");
+    };
+
+    superCar.prototype.autodrive = function () {
+      console.log("The car had autodrive system");
+    };
+
+    Object.setPrototypeOf(superCar.prototype, autoMobiles.prototype);
+    let supercar = new superCar("BMW", 464988464, "Zblack", 4, 5000000000);
+    console.log(supercar);
+  </script>
+</html>
